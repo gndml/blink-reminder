@@ -2,10 +2,10 @@ name: Blink Reminder
 
 on:
   schedule:
-    # Every 30 minutes, 8am-10pm UTC, Monday-Friday
-    # Customize this to match your working hours and timezone
-    # See docs/CUSTOMIZATION.md for examples
-    - cron: "*/30 8-22 * * 1-5"
+    # Every 30 minutes, 8am-5:30pm EST (UTC-5), Monday-Friday
+    - cron: "*/30 13-22 * * 1-5"
+    # Every 2 hours, 8am-5pm EST (UTC-5), Saturday-Sunday
+    - cron: "0 13,15,17,19,21 * * 0,6"
   workflow_dispatch: # Manual trigger for testing
 
 jobs:
