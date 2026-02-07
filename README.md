@@ -10,7 +10,12 @@
 
 Staring at screens reduces your blink rate from ~15 to ~5 times per minute, leading to dry eyes, eye strain, and headaches. The **20-20-20 rule** helps: every 20 minutes, look at something 20 feet away for 20 seconds.
 
-This bot sends you periodic Telegram reminders to do exactly that.
+There isn't a great form factor for this type of reminder today if you work in corporate america because:
+1. phone alarms are disruptive and not expressive
+2. calendar reminders either can't be scheduled with this frequency or it would overwhelm your calendar
+3. most corporate security orgs will not let you install plug-ins/extensions that are built to do this
+
+This bot sends you periodic Telegram reminders to do exactly that. 
 
 ## How It Works
 
