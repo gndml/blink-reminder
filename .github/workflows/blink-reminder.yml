@@ -1,0 +1,46 @@
+name: Blink Reminder
+
+on:
+  schedule:
+    # Every 30 minutes, 8am-10pm UTC, Monday-Friday
+    # Customize this to match your working hours and timezone
+    # See docs/CUSTOMIZATION.md for examples
+    - cron: "*/30 8-22 * * 1-5"
+  workflow_dispatch: # Manual trigger for testing
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate secrets
+        run: |
+          if [ -z "${{ secrets.TELEGRAM_BOT_TOKEN }}" ]; then
+            echo "::error::TELEGRAM_BOT_TOKEN secret is not set."
+            echo "Please add your Telegram bot token as a repository secret."
+            echo "See docs/SETUP.md for instructions."
+            exit 1
+          fi
+          if [ -z "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
+            echo "::error::TELEGRAM_CHAT_ID secret is not set."
+            echo "Please add your Telegram chat ID as a repository secret."
+            echo "See docs/SETUP.md for instructions."
+            exit 1
+          fi
+          echo "Secrets validated successfully."
+
+      - name: Send blink reminder
+        run: |
+          MESSAGE="👀 Time to blink! Look away from the screen for 20 seconds. Your eyes will thank you."
+
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\": \"${{ secrets.TELEGRAM_CHAT_ID }}\", \"text\": \"${MESSAGE}\"}")
+
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "Reminder sent successfully (HTTP $HTTP_STATUS)"
+          else
+            echo "::error::Failed to send reminder (HTTP $HTTP_STATUS)"
+            echo "See docs/TROUBLESHOOTING.md for help."
+            exit 1
+          fi

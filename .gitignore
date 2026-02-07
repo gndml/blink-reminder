@@ -1,0 +1,22 @@
+# Environment and secrets
+.env
+.env.*
+*.env
+secrets.*
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+test-*
+*.test
+*.log
