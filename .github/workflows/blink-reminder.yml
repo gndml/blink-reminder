@@ -30,7 +30,15 @@ jobs:
 
       - name: Send blink reminder
         run: |
-          MESSAGE="👀 Time to blink! Look away from the screen for 20 seconds. Take 10-20 slow and deliberate blinks with slight pause while eyes are closed. This will express oil from your meibomian glands and help with dry eye symptoms. Your eyes will thank you."
+          MESSAGE="👀 Time to blink! 
+          
+          Look away from the screen for 20 seconds. 
+          
+          Take 10-20 slow and deliberate blinks with slight pause while eyes are closed. 
+          
+          This will express oil from your meibomian glands and help with dry eye symptoms. 
+          
+          Your eyes will thank you."
 
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
