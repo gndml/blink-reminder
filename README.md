@@ -54,7 +54,7 @@ Read the full privacy analysis in **[docs/PRIVACY.md](docs/PRIVACY.md)**.
 
 ## Customization
 
-The default schedule sends reminders every 30 minutes during weekday working hours (8am-10pm UTC). You can customize:
+The default schedule sends reminders every 30 minutes on weekdays and every 2 hours on weekends, 8am-5:30pm EST. You can customize:
 
 - Reminder schedule (different hours, weekends, frequency)
 - Message text
