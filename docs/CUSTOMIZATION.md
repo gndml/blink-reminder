@@ -4,13 +4,14 @@ All customization is done by editing `.github/workflows/blink-reminder.yml` in y
 
 ## Change the Schedule
 
-The schedule is controlled by the `cron` field. The default is:
+The schedule is controlled by the `cron` field. The defaults are:
 
 ```yaml
-- cron: "*/30 8-22 * * 1-5"
+- cron: "*/30 13-22 * * 1-5"  # Weekdays: every 30 min, 8am-5:30pm EST
+- cron: "0 13,15,17,19,21 * * 0,6"  # Weekends: every 2 hours, 8am-4pm EST
 ```
 
-This means: every 30 minutes, hours 8-22 UTC, Monday through Friday.
+This means: every 30 minutes on weekdays and every 2 hours on weekends, during 8am-5:30pm EST (UTC-5).
 
 ### Cron Format
 
@@ -28,7 +29,8 @@ This means: every 30 minutes, hours 8-22 UTC, Monday through Friday.
 
 | Schedule | Cron Expression | Description |
 |----------|----------------|-------------|
-| Every 30 min, work hours | `*/30 8-22 * * 1-5` | Default |
+| Every 30 min, weekdays EST | `*/30 13-22 * * 1-5` | Default (weekdays) |
+| Every 2 hours, weekends EST | `0 13,15,17,19,21 * * 0,6` | Default (weekends) |
 | Every hour, work hours | `0 8-22 * * 1-5` | Less frequent |
 | Every 20 min, work hours | `*/20 8-22 * * 1-5` | More frequent |
 | Every day including weekends | `*/30 8-22 * * *` | 7 days a week |
@@ -112,7 +114,7 @@ You can add multiple cron triggers or duplicate the job with different messages.
 ```yaml
 on:
   schedule:
-    - cron: "*/30 8-22 * * 1-5"   # Every 30 min
+    - cron: "*/30 13-22 * * 1-5"   # Every 30 min, weekdays EST
     - cron: "0 10,12,14,16,18,20 * * 1-5"  # Every 2 hours
 
 jobs:
